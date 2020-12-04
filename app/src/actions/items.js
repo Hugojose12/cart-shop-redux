@@ -16,7 +16,17 @@ export const itemsStartLoading = () => {
     }
 }
 
+export const itemActive = (id, item) => ({
+    type: types.itemActive,
+    payload: {
+        id,
+        ...item
+    }
+})
+
 const itemsLoaded = (items) => ({
     type: types.itemsLoaded,
     payload: items
 })
+
+export const itemCleanerActive = () => ({ type: types.itemCleanerActive });

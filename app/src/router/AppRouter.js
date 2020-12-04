@@ -10,6 +10,7 @@ import { ShopScreen } from '../components/shop/ShopScreen';
 import { Layout } from 'antd';
 
 import 'antd/dist/antd.css';
+import '../styles/styles.css'
 
 const { Header, Content } = Layout;
 
@@ -21,7 +22,7 @@ export const AppRouter = () => {
           <Header>
             <Navbar/>
           </Header>
-          <Content style={{ padding: '20px 50px' }}>
+          <Content>
             <Switch>
               <Route exact path="/cart" component="" />
               <Route exact path="/" component={ ShopScreen } />

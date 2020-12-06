@@ -20,14 +20,15 @@ export const CardItem = (item) => {
                 <Card className="product-card" key={item.id}
                     hoverable
                     style={{ margin: "0" }}
-                    cover={<img src={item.image} onClick={handleActivateNote} />}
+                    cover={<img src={item.image}/>}
                     actions={[
                         <HeartFilled key="list" />,
                         <ShoppingCartOutlined key="buy" />,
                     ]}
+                    onClick={handleActivateNote} 
                 >
                     <div className="product-category">
-                    <p>{item.category}</p>
+                        <p>{item.category}</p>
                     </div>
                     <h3 className="product-title">{item.title}</h3>
                     <h4 className="product-price">${item.price}</h4>

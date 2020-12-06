@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Modal, Button, Row, Col, Image, Select, Divider} from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { CloseModal } from '../../actions/ui';
-import { itemCleanerActive } from '../../actions/items';
+import { CloseModal, startLoadingModal } from '../../actions/ui';
+import { itemCleanerActive, startAddItemToCart } from '../../actions/items';
 import { TagOutlined, HeartFilled, SwapOutlined, FacebookOutlined, TwitterOutlined, InstagramOutlined, GooglePlusOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -12,12 +12,24 @@ export const ModalItem = () => {
     const dispatch = useDispatch();
 
     const { active: item } = useSelector( state => state.items );
-    const { modalOpen } = useSelector( state => state.ui );
+    const { modalOpen, loadingModal } = useSelector( state => state.ui );
+
+    const [quantity, setQuantity] = useState(1)
+
+    const handleQuantityItem = (e) => {
+        setQuantity(parseInt(e))
+    }
     
     const handleCloseModal = () => {
         dispatch( CloseModal() );
         dispatch( itemCleanerActive() );
     }
+
+    const handleAddToCart = () => {
+        dispatch(startLoadingModal());
+        dispatch ( startAddItemToCart(quantity, item) );
+    }
+
     console.log(item)
     return (
         <Modal
@@ -42,29 +54,41 @@ export const ModalItem = () => {
                         <p>{item.category}</p>
                     </div>
                     <h2 className="item-modal-title">{item.title}</h2>
-                    <span class="item-modal-price">${item.price}</span>
+                    <span className="item-modal-price">${item.price}</span>
                     <Divider />
-                    <p class="item-text-muted"> {item.description} </p>
-                    <Select defaultValue={1} style={{ width: 100 }}>
+                    <p className="item-text-muted"> {item.description} </p>
+                    <Select 
+                        name="select-quantity-item" 
+                        defaultValue={1} 
+                        style={{ width: 100 }}
+                        onChange={handleQuantityItem}
+                    >
                         <Option value="1">1</Option>
                         <Option value="2">2</Option>
                         <Option value="3">3</Option>
                         <Option value="4">4</Option>
                         <Option value="5">5</Option>
+                        
                     </Select>
-                    <Button className="btn-modal-cart" type="primary">Add to Cart</Button>
-                    
+                    <Button 
+                        className="btn-modal-cart" 
+                        type="primary" 
+                        onClick={handleAddToCart}
+                        loading={loadingModal}
+                    >
+                        Add to Cart
+                    </Button>   
                 </Col>
                 <Divider />
                 <Col span={24}>
-                    <div class="d-flex flex-wrap justify-content-between">
-                        <div class="item-modal-footer">
+                    <div className="d-flex flex-wrap justify-content-between">
+                        <div className="item-modal-footer">
                             <Button className="btn-modal-share"><HeartFilled />To Wishlist</Button>
                             <Button className="btn-modal-share"><SwapOutlined />Compare</Button>
                         </div>
-                        <div class="item-modal-footer footer-float-right">
+                        <div className="item-modal-footer footer-float-right">
                             <div>
-                                <span class="text-muted">Share:&nbsp;&nbsp;</span>
+                                <span className="text-muted">Share: </span>
                                 <Button className="btn-modal-share"><FacebookOutlined /></Button>
                                 <Button className="btn-modal-share"><TwitterOutlined /></Button>
                                 <Button className="btn-modal-share"><InstagramOutlined /></Button>

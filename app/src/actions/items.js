@@ -40,7 +40,7 @@ export const startAddItemToCart = (quantity, item) => {
             ...item
         }
 
-         const resp = await new Promise((res, rej) =>{
+        const resp = await new Promise((res, rej) =>{
             setTimeout(() => res(newItem), 2000);
         })
         .then((resp) => {
@@ -49,7 +49,7 @@ export const startAddItemToCart = (quantity, item) => {
             notification['success']({
             message: `${resp.title} (${resp.quantity})`,
             description:
-              `This item was already in your Cart. If you don't want all of them, edit your Cart.`,
+              `This article is already in your shopping cart. If you don't want them all, edit your Cart.`,
             });
         }).catch((error) => {
             notification['error']({
@@ -65,9 +65,58 @@ export const startAddItemToCart = (quantity, item) => {
     }
 }
 
+export const startCartUpdate = (quantity, item) => {
+    return async(dispatch, getState) => {
+
+        const { inCart } = getState().cart
+
+        const itemInCart = inCart.find(cp => {
+            if (cp.id === item.id) {
+                cp.quantity += quantity;
+            }
+
+            return cp
+        });
+
+        console.log("/////", itemInCart)
+
+       const resp = await new Promise((res, rej) =>{
+            setTimeout(() => res(itemInCart), 2000);
+        })
+        .then((resp) => {
+            dispatch(updateItemToCart(resp))
+
+            notification['success']({
+            message: `${resp.title} (${resp.quantity})`,
+            description:
+              `This item was already in your Cart. If you don't want all of them, edit your Cart.`,
+            });
+        }).catch((error) => {
+            notification['error']({
+            message: `${error.message}`,
+            description:
+                'Your item could not be updated in the cart',
+            });
+        }).finally(() => {
+            dispatch( finishLoadingModal() )
+            dispatch( CloseModal() )
+        })
+
+        
+
+    }   
+}
+
 const addItemToCart = (item) => ({
     type: types.itemToCart,
     payload: {
         ...item
+    }
+})
+
+const updateItemToCart = (items) => ({
+    type: types.updateItemToCart,
+    payload: {
+        items
     }
 })

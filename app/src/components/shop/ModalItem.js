@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Modal, Button, Row, Col, Image, Select, Divider} from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { CloseModal, startLoadingModal } from '../../actions/ui';
-import { itemCleanerActive, startAddItemToCart } from '../../actions/items';
+import { itemCleanerActive, startAddItemToCart, startCartUpdate } from '../../actions/items';
 import { TagOutlined, HeartFilled, SwapOutlined, FacebookOutlined, TwitterOutlined, InstagramOutlined, GooglePlusOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -13,6 +13,7 @@ export const ModalItem = () => {
 
     const { active: item } = useSelector( state => state.items );
     const { modalOpen, loadingModal } = useSelector( state => state.ui );
+    const { inCart } = useSelector( state => state.cart );
 
     const [quantity, setQuantity] = useState(1)
 
@@ -26,11 +27,26 @@ export const ModalItem = () => {
     }
 
     const handleAddToCart = () => {
-        dispatch(startLoadingModal());
-        dispatch ( startAddItemToCart(quantity, item) );
+        let productAlreadyInCart = false;
+
+        inCart.forEach(cp => {
+            if (cp.id === item.id) {
+              productAlreadyInCart = true;
+            }
+        });
+
+        if(!productAlreadyInCart) {
+            dispatch(startLoadingModal());
+            dispatch ( startAddItemToCart(quantity, item) );
+        } else {
+            dispatch(startLoadingModal());
+            dispatch( startCartUpdate(quantity, item) )
+        }
+        
+        
     }
 
-    console.log(item)
+    //console.log(item)
     return (
         <Modal
             title={item.title}

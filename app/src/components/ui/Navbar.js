@@ -8,10 +8,13 @@ export const Navbar = () => {
     const { inCart } = useSelector( state => state.cart );
     const [itemsInCart, setitemsInCart] = useState(0)
 
-    /* useEffect(() => {
-        console.log()
-        inCart.reduce( (acc, cur) => setitemsInCart(itemsInCart + item.quantity)) // revisar esto
-    }, [inCart]) */
+    useEffect(() => {
+        if(inCart.length > 0) {
+            const QuantityItems = inCart.map(current => current.quantity).reduce((acc, cur) => acc += cur)
+            setitemsInCart(QuantityItems)
+        }
+        
+    }, [inCart])
 
     return (
         <div>

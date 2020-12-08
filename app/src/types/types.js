@@ -5,7 +5,6 @@ export const types = {
     itemCleanerActive: '[ITEM] Item Cleaner active',
     itemToCart: '[ITEM] Add To Cart',
     updateItemInCart: '[ITEM] Update In Cart',
-    itemToCart: '[ITEM] Add To Cart',
     removeItemCart: '[ITEM] Remove Item from Cart',
 
     uiStartLoading: '[UI] Start loading',

@@ -19,7 +19,7 @@ export const CartItem = (item) => {
             <Col className="cart-item__del">
                 
             </Col>
-            <Col span={5} className="cart-item__thumb">
+            <Col span={4} className="cart-item__thumb">
                 <Image src={item.image} />
             </Col>
             <Col span={14} className="cart-item__details">
@@ -27,7 +27,7 @@ export const CartItem = (item) => {
                 <p>Quantity: {item.quantity}</p>
                 
             </Col>
-            <Col span={4} className="">
+            <Col span={5} className="">
                 <Row>
                 <Col className="w-100">
                     <Button

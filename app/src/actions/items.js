@@ -50,13 +50,13 @@ export const startAddItemToCart = (quantity, item) => {
                 message: `${resp.title} (${resp.quantity})`,
                 description:
                 `This article is already in your shopping cart. If you don't want them all, edit your Cart.`,
-                placement: 'bottomRight'
+                placement: 'bottomLeft'
             });
         }).catch((error) => {
             notification.error({
                 message: `${resp.title}`,
                 description: 'Your item could not be added to the cart',
-                placement: 'bottomRight'
+                placement: 'bottomLeft'
             });
         }).finally(() => {
             dispatch( finishLoadingModal() )
@@ -94,14 +94,14 @@ export const startCartUpdate = (quantity, item) => {
                 message: `${resp.title} (${resp.quantity})`,
                 description:
                 `This item was already in your Cart. If you don't want all of them, edit your Cart.`,
-                placement: 'bottomRight'
+                placement: 'bottomLeft'
             });
         }).catch((error) => {
             notification.error({
                 message: `${error.message}`,
                 description:
                     'Your item could not be updated in the cart',
-                placement: 'bottomRight'
+                placement: 'bottomLeft'
             });
         }).finally(() => {
             dispatch( finishLoadingModal() )
@@ -122,7 +122,7 @@ export const deletedItemFromCart = (itemId) => {
             notification.success({
                 description:
                 `The item has been removed from the shopping cart.`,
-                placement: 'bottomRight'
+                placement: 'bottomLeft'
             });
         })
         .catch((error) => {
@@ -130,7 +130,7 @@ export const deletedItemFromCart = (itemId) => {
                 message: `${error.message}`,
                 description:
                     'Your item could not be deleted in the cart',
-                placement: 'bottomRight'
+                placement: 'bottomLeft'
             })
         })
         .finally(() => {

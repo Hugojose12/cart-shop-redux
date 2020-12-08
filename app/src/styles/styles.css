@@ -2,6 +2,10 @@
     font-family: 'Rubik', sans-serif;
 }
 
+.w-100 {
+    width: 100%;
+}
+
 /* Carousel items */
 
 .ant-carousel {
@@ -273,4 +277,77 @@
     border-radius: 50%;
     padding: 5px 8px;
     color: white;
+}
+
+.float-cart{
+    width: 500px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -500px;
+    z-index: 99;
+    background-color: white;
+    box-sizing: border-box;
+    -webkit-transition: right .2s;
+    transition: right .2s;
+    padding: 1% 0;
+    overflow-y: scroll;
+}
+
+.float-cart-open {
+    right: 0;
+}
+
+.ant-layout-header {
+    -webkit-transition: right .2s;
+    transition: right .2s;
+    right: 0;
+    position: relative;
+}
+
+.navbar-open-cart {
+    right: 500px;
+    
+}
+
+.cart-item {
+    color: #000;
+    padding: 0 7%;
+}
+
+.cart-item__thumb {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cart-item .ant-divider-horizontal {
+    margin: 10px 0;
+}
+
+.cart-item p {
+    font-size: 16px;
+}
+
+.btn-actions-cart {
+    float: right;
+    border-radius: 0;
+    display: inline-block;
+}
+
+.cart-item__price {
+    float: right;
+    margin: 8px 0;
+}
+
+.float-cart-footer {
+    padding: 0 7%;
+    margin-top: 30px;
+}
+
+.float-cart-footer__total {
+    float: right;
+}
+
+.float-cart-footer button{
+    width: 100%;
 }

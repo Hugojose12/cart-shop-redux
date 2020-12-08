@@ -9,3 +9,6 @@ export const finishLoadingModal = () => ({type: types.uiFinishLoadingModal})
 
 export const OpenModal = () => ({ type: types.uiOpenModal });
 export const CloseModal = () => ({ type: types.uiCloseModal });
+
+export const OpenCart = () => ({ type: types.uiOpenCart });
+export const CloseCart = () => ({ type: types.uiCloseCart });

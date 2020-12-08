@@ -36,30 +36,32 @@ export const startAddItemToCart = (quantity, item) => {
     return async(dispatch) => {
 
         const newItem = {
-            quantity,
-            ...item
+            ...item,
+            quantity
         }
 
         const resp = await new Promise((res, rej) =>{
-            setTimeout(() => res(newItem), 2000);
+            setTimeout(() => res(newItem), 500);
         })
         .then((resp) => {
             dispatch(addItemToCart(resp))
 
-            notification['success']({
-            message: `${resp.title} (${resp.quantity})`,
-            description:
-              `This article is already in your shopping cart. If you don't want them all, edit your Cart.`,
+            notification.success({
+                message: `${resp.title} (${resp.quantity})`,
+                description:
+                `This article is already in your shopping cart. If you don't want them all, edit your Cart.`,
+                placement: 'bottomRight'
             });
         }).catch((error) => {
-            notification['error']({
-            message: `${resp.title}`,
-            description:
-                'Your item could not be added to the cart',
+            notification.error({
+                message: `${resp.title}`,
+                description: 'Your item could not be added to the cart',
+                placement: 'bottomRight'
             });
         }).finally(() => {
             dispatch( finishLoadingModal() )
-            dispatch( CloseModal() )
+            dispatch( CloseModal() )                        
+            dispatch( itemCleanerActive() )
         })
              
     }
@@ -70,41 +72,71 @@ export const startCartUpdate = (quantity, item) => {
 
         const { inCart } = getState().cart
 
-        const itemInCart = inCart.find(cp => {
-            if (cp.id === item.id) {
-                cp.quantity += quantity;
+        const updateItem = {
+            ...item
+        }
+
+        inCart.find(cp => {
+            if (cp.id === updateItem.id) {
+                updateItem.quantity = cp.quantity + quantity
             }
 
-            return cp
+            return null
         });
 
-        console.log("/////", itemInCart)
-
-       const resp = await new Promise((res, rej) =>{
-            setTimeout(() => res(itemInCart), 2000);
+        const resp = await new Promise((res, rej) =>{
+            setTimeout(() => res(updateItem), 500);
         })
         .then((resp) => {
-            dispatch(updateItemToCart(resp))
+            dispatch(updateItemInCart(resp))
 
-            notification['success']({
-            message: `${resp.title} (${resp.quantity})`,
-            description:
-              `This item was already in your Cart. If you don't want all of them, edit your Cart.`,
+            notification.success({
+                message: `${resp.title} (${resp.quantity})`,
+                description:
+                `This item was already in your Cart. If you don't want all of them, edit your Cart.`,
+                placement: 'bottomRight'
             });
         }).catch((error) => {
-            notification['error']({
-            message: `${error.message}`,
-            description:
-                'Your item could not be updated in the cart',
+            notification.error({
+                message: `${error.message}`,
+                description:
+                    'Your item could not be updated in the cart',
+                placement: 'bottomRight'
             });
         }).finally(() => {
             dispatch( finishLoadingModal() )
             dispatch( CloseModal() )
+            dispatch( itemCleanerActive() )
         })
-
-        
-
     }   
+}
+
+export const deletedItemFromCart = (itemId) => {
+    return async(dispatch) => {
+        await new Promise((res, rej) =>{
+            setTimeout(() => res(itemId), 1000);
+        })
+        .then((res) => {
+            dispatch(deletedItemInCart(res))
+
+            notification.success({
+                description:
+                `The item has been removed from the shopping cart.`,
+                placement: 'bottomRight'
+            });
+        })
+        .catch((error) => {
+            notification.error({
+                message: `${error.message}`,
+                description:
+                    'Your item could not be deleted in the cart',
+                placement: 'bottomRight'
+            })
+        })
+        .finally(() => {
+            dispatch( finishLoadingModal() )
+        })
+    }
 }
 
 const addItemToCart = (item) => ({
@@ -114,9 +146,14 @@ const addItemToCart = (item) => ({
     }
 })
 
-const updateItemToCart = (items) => ({
-    type: types.updateItemToCart,
+const updateItemInCart = (item) => ({
+    type: types.updateItemInCart,
     payload: {
-        items
+        ...item
     }
+})
+
+const deletedItemInCart = (itemId) => ({
+    type: types.removeItemCart,
+    payload: itemId 
 })

@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     loadingModal: false,
     modalOpen: false,
+    cartOpen: false,
     msgError: null
 }
 
@@ -35,17 +36,27 @@ export const uiReducer = ( state = initialState, action ) => {
             }    
 
         case types.uiOpenModal:
-                return {
-                    ...state,
-                    modalOpen: true
-                }
+            return {
+                ...state,
+                modalOpen: true
+            }
     
         case types.uiCloseModal:
-                return {
-                    ...state,
-                    modalOpen: false
-                }
-
+            return {
+                ...state,
+                modalOpen: false
+            }
+        case types.uiOpenCart:
+            return {
+                ...state,
+                cartOpen: true
+            }
+    
+        case types.uiCloseCart:
+            return {
+                ...state,
+                cartOpen: false
+            }
         default:
             return state;
     }

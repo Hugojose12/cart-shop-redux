@@ -35,11 +35,11 @@ export const ModalItem = () => {
             }
         });
 
-        if(!productAlreadyInCart) {
-            dispatch(startLoadingModal());
+        dispatch(startLoadingModal());
+
+        if(!productAlreadyInCart) {  
             dispatch ( startAddItemToCart(quantity, item) );
         } else {
-            dispatch(startLoadingModal());
             dispatch( startCartUpdate(quantity, item) )
         }
         

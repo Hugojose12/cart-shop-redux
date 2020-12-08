@@ -12,7 +12,7 @@ export const cartReducer = ( state = initialState, action ) => {
                 ...state,
                 inCart: [action.payload, ...state.inCart]
             }
-        case types.updateItemToCart:
+        case types.updateItemInCart:
             return {
                 ...state,
                 inCart: state.inCart.map(
@@ -20,6 +20,13 @@ export const cartReducer = ( state = initialState, action ) => {
                     ? action.payload
                     : item
                 )
+            }
+        
+        case types.removeItemCart:
+            console.log(action.payload)
+            return {
+                ...state,
+                inCart: state.inCart.filter( item => item.id !== action.payload )
             }
 
             

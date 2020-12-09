@@ -24,13 +24,7 @@ export const itemActive = (id, item) => ({
     }
 })
 
-const itemsLoaded = (items) => ({
-    type: types.itemsLoaded,
-    payload: items
-})
-
 export const itemCleanerActive = () => ({ type: types.itemCleanerActive });
-
 
 export const startAddItemToCart = (quantity, item) => {
     return async(dispatch, getState) => {
@@ -81,6 +75,39 @@ export const startAddItemToCart = (quantity, item) => {
     }
 }
 
+export const deletedItemFromCart = (itemId) => {
+    return async(dispatch) => {
+        await new Promise((res, rej) =>{
+            setTimeout(() => res(itemId), 1000);
+        })
+        .then((res) => {
+            dispatch(deletedItemInCart(res))
+
+            notification.success({
+                description:
+                `The item has been removed from the shopping cart.`,
+                placement: 'bottomLeft'
+            });
+        })
+        .catch((error) => {
+            notification.error({
+                message: `${error.message}`,
+                description:
+                    'Your item could not be deleted in the cart',
+                placement: 'bottomLeft'
+            })
+        })
+        .finally(() => {
+            dispatch( finishLoadingModal() )
+        })
+    }
+}
+
+export const itemsLoaded = (items) => ({
+    type: types.itemsLoaded,
+    payload: items
+})
+
 const startCartUpdate = (quantity, item) => {
     return async(dispatch, getState) => {
 
@@ -123,34 +150,6 @@ const startCartUpdate = (quantity, item) => {
             dispatch( itemCleanerActive() )
         })
     }   
-}
-
-export const deletedItemFromCart = (itemId) => {
-    return async(dispatch) => {
-        await new Promise((res, rej) =>{
-            setTimeout(() => res(itemId), 1000);
-        })
-        .then((res) => {
-            dispatch(deletedItemInCart(res))
-
-            notification.success({
-                description:
-                `The item has been removed from the shopping cart.`,
-                placement: 'bottomLeft'
-            });
-        })
-        .catch((error) => {
-            notification.error({
-                message: `${error.message}`,
-                description:
-                    'Your item could not be deleted in the cart',
-                placement: 'bottomLeft'
-            })
-        })
-        .finally(() => {
-            dispatch( finishLoadingModal() )
-        })
-    }
 }
 
 const addItemToCart = (item) => ({

@@ -9,7 +9,7 @@ export const CardItem = (item) => {
 
     const dispatch = useDispatch();
 
-	const handleActivateNote = () => {
+	const handleActivateItem = () => {
         dispatch( itemActive(item.id, item))
         dispatch( OpenModal() );
  	}
@@ -25,7 +25,7 @@ export const CardItem = (item) => {
                         <HeartFilled key="list" />,
                         <ShoppingCartOutlined key="buy" />,
                     ]}
-                    onClick={handleActivateNote} 
+                    onClick={handleActivateItem} 
                 >
                     <div className="product-category">
                         <p>{item.category}</p>

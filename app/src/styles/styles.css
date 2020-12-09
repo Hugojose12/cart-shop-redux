@@ -398,7 +398,7 @@
 }
 
 .select_sort_items {
-    margin-bottom: 20px;
+    padding-right: 15px;
 }
 
 .select_sort_items .ant-select{
@@ -406,7 +406,11 @@
     float: right;
 }
 
-.select_sort_items span{
+.show_total_items {
+    padding-left: 15px;
+}
+
+.select_sort_items p{
     float: right;
     margin-right: 5px;
     padding-top: 5px;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { CartItem } from './CartItem';
-import { Row, Col, Button, Spin, Empty } from 'antd';
+import { Row, Col, Button, Spin } from 'antd';
 import { ShoppingCartOutlined, LoadingOutlined } from '@ant-design/icons';
 
 export const Cart = () => {

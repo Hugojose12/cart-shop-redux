@@ -5,7 +5,6 @@ const initialState = {
     active: null
 };
 
-
 export const itemsReducer = ( state = initialState, action ) => {
     switch(action.type){
         case types.itemsLoaded:

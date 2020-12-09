@@ -4,7 +4,6 @@ const initialState = {
     inCart: []
 };
 
-
 export const cartReducer = ( state = initialState, action ) => {
     switch(action.type){
         case types.itemToCart:
@@ -28,8 +27,7 @@ export const cartReducer = ( state = initialState, action ) => {
                 ...state,
                 inCart: state.inCart.filter( item => item.id !== action.payload )
             }
-
-            
+  
         default:
             return state
     }

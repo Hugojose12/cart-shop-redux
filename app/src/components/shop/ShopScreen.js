@@ -2,32 +2,27 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsStartLoading } from '../../actions/items';
 import { startLoading } from '../../actions/ui';
-import { Skeleton, Row, Col, Select } from 'antd';
+import { Skeleton, Row, Col } from 'antd';
 
 import { CarouselScreen } from './CarouselScreen';
 import { CardItem } from './CardItem';
 import { ModalItem } from './ModalItem';
 import { Cart } from './Cart';
+import { Sort } from '../ui/Sort';
 
-const { Option } = Select;
 
 export const ShopScreen = () => {
 
 		const dispatch = useDispatch();
 		
-		const {items} = useSelector(state => state.items)
+		const { items } = useSelector(state => state.items)
 		const { active } = useSelector( state => state.items );
-		const {loading} = useSelector(state => state.ui)
+		const { loading } = useSelector(state => state.ui)
 
 		useEffect(() => {
 			dispatch(startLoading());
 			dispatch(itemsStartLoading());
 	}, [dispatch])
-
-
-	const handleChangeSelect = () => {
-		
-	}
 
     return (
         <>
@@ -40,18 +35,9 @@ export const ShopScreen = () => {
 							<Skeleton type="avatar" size="small" active>
 								<Skeleton.Image />
 							</Skeleton>
-							
-							
+
 						:   <Row>
-								<Col span={12}>{items.length} Product(s) found.</Col>
-								<Col span={12} className="select_sort_items">
-									<Select defaultValue="0" style={{ width: 150 }} onChange={handleChangeSelect}>
-										<Option value="0">Featured</Option>
-										<Option value="1">Lowest to highest</Option>
-										<Option value="2">Highest to lowest</Option>
-									</Select>
-									<span>Sort by</span>
-								</Col>
+								<Sort />
 								{ items.map( item => (	
 									<CardItem key={ item.id } {...item} />
 								)) }

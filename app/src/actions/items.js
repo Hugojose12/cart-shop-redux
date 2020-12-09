@@ -33,41 +33,55 @@ export const itemCleanerActive = () => ({ type: types.itemCleanerActive });
 
 
 export const startAddItemToCart = (quantity, item) => {
-    return async(dispatch) => {
+    return async(dispatch, getState) => {
 
-        const newItem = {
-            ...item,
-            quantity
-        }
+        const { inCart } = getState().cart;
+        let productAlreadyInCart = false;
 
-        const resp = await new Promise((res, rej) =>{
-            setTimeout(() => res(newItem), 500);
-        })
-        .then((resp) => {
-            dispatch(addItemToCart(resp))
+        inCart.forEach(cp => {
+            if (cp.id === item.id) {
+              productAlreadyInCart = true;
+            }
+        });
 
-            notification.success({
-                message: `${resp.title} (${resp.quantity})`,
-                description:
-                `This article is already in your shopping cart. If you don't want them all, edit your Cart.`,
-                placement: 'bottomLeft'
-            });
-        }).catch((error) => {
-            notification.error({
-                message: `${resp.title}`,
-                description: 'Your item could not be added to the cart',
-                placement: 'bottomLeft'
-            });
-        }).finally(() => {
-            dispatch( finishLoadingModal() )
-            dispatch( CloseModal() )                        
-            dispatch( itemCleanerActive() )
-        })
-             
+        if(!productAlreadyInCart) { 
+            
+            const newItem = {
+                ...item,
+                quantity
+            }
+            
+            const resp = await new Promise((res, rej) =>{
+                setTimeout(() => res(newItem), 500);
+            })
+            .then((resp) => {
+                dispatch(addItemToCart(resp))
+    
+                notification.success({
+                    message: `${resp.title} (${resp.quantity})`,
+                    description:
+                    `This article is already in your shopping cart. If you don't want them all, edit your Cart.`,
+                    placement: 'bottomLeft'
+                });
+            }).catch((error) => {
+                notification.error({
+                    message: `${resp.title}`,
+                    description: 'Your item could not be added to the cart',
+                    placement: 'bottomLeft'
+                });
+            }).finally(() => {
+                dispatch( finishLoadingModal() )
+                dispatch( CloseModal() )                        
+                dispatch( itemCleanerActive() )
+            })
+
+        } else {
+            dispatch( startCartUpdate(quantity, item) )
+        }    
     }
 }
 
-export const startCartUpdate = (quantity, item) => {
+const startCartUpdate = (quantity, item) => {
     return async(dispatch, getState) => {
 
         const { inCart } = getState().cart

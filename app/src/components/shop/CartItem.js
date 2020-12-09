@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Row, Col, Divider, Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { PlusCircleOutlined, MinusCircleOutlined, DeleteOutlined } from '@ant-design/icons';
-import { deletedItemFromCart } from '../../actions/items';
+import { deletedItemFromCart, startAddItemToCart } from '../../actions/items';
 import { startLoadingModal } from '../../actions/ui';
 
 export const CartItem = (item) => {
@@ -12,6 +12,16 @@ export const CartItem = (item) => {
     const handleRemovingItem = () => {
         dispatch(startLoadingModal());
         dispatch( deletedItemFromCart(item.id) )
+    }
+
+    const handleIncreasingQuantity = () => {
+        dispatch(startLoadingModal());
+        dispatch ( startAddItemToCart(1, item) );
+    }
+
+    const handleReducingQuantity = () => {
+        dispatch(startLoadingModal());
+        dispatch ( startAddItemToCart(-1, item) );
     }
 
     return (
@@ -41,14 +51,15 @@ export const CartItem = (item) => {
                 </Col>
                 <Col className="w-100">
                     <Button
+                        disabled={item.quantity <= 1 ? true : false}
                         icon={<MinusCircleOutlined />}
                         className="btn-actions-cart"  
-                        //onClick={}
+                        onClick={handleReducingQuantity}
                     />
                     <Button
                         icon={<PlusCircleOutlined />}
                         className="btn-actions-cart" 
-                        //onClick={}
+                        onClick={ handleIncreasingQuantity }
                     />
                 </Col>
                 </Row>

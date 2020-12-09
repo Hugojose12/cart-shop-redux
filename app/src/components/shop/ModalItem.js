@@ -13,8 +13,6 @@ export const ModalItem = () => {
 
     const { active: item } = useSelector( state => state.items );
     const { modalOpen, loadingModal } = useSelector( state => state.ui );
-    const { inCart } = useSelector( state => state.cart );
-
     const [quantity, setQuantity] = useState(1)
 
     const handleQuantityItem = (e) => {
@@ -27,23 +25,8 @@ export const ModalItem = () => {
     }
 
     const handleAddToCart = () => {
-        let productAlreadyInCart = false;
-
-        inCart.forEach(cp => {
-            if (cp.id === item.id) {
-              productAlreadyInCart = true;
-            }
-        });
-
         dispatch(startLoadingModal());
-
-        if(!productAlreadyInCart) {  
-            dispatch ( startAddItemToCart(quantity, item) );
-        } else {
-            dispatch( startCartUpdate(quantity, item) )
-        }
-        
-        
+        dispatch ( startAddItemToCart(quantity, item) );
     }
 
     //console.log(item)

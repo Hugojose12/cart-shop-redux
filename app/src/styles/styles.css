@@ -396,3 +396,20 @@
     font-size: 20px;
     align-items: center;
 }
+
+.select_sort_items {
+    margin-bottom: 20px;
+}
+
+.select_sort_items .ant-select{
+    width: 150px;
+    float: right;
+}
+
+.select_sort_items span{
+    float: right;
+    margin-right: 5px;
+    padding-top: 5px;
+}
+
+

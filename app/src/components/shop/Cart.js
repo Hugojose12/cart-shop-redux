@@ -18,7 +18,7 @@ export const Cart = () => {
         inCart.forEach((cur) => {
             totalPrice.current += (cur.price * cur.quantity)
 
-            return totalPrice.current.toFixed(2)
+            return totalPrice.current
         })
     }, [inCart])
 
@@ -50,7 +50,7 @@ export const Cart = () => {
                             </Col>
                             <Col span={12}>
                                 <p className="float-cart-footer__total">
-                                    <strong>$ {totalPrice.current}</strong>
+                                    <strong>$ {totalPrice.current.toFixed(2)}</strong>
                                 </p>
                             </Col>
                             <Col span={24}>

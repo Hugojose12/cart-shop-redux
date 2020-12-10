@@ -416,4 +416,25 @@
     padding-top: 5px;
 }
 
+.filter_prices_links strong{
+    font-size: 16px;
+}
+
+.filter_prices_links p{
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.filter_prices_links p:hover{
+    text-decoration: underline;
+}
+
+.filter_prices_links form{
+    margin-top: 5px;
+}
+
+#filter_prices_form_controls input{ 
+    width: 90%;
+}
+
 

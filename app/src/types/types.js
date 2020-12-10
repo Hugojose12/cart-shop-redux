@@ -1,12 +1,13 @@
 export const types = {
 
-    itemsLoaded: '[ITEM] Items loaded',
-    itemActive: '[ITEM] Item active',
+    itemsLoaded: '[ITEM] Items Loaded',
+    itemActive: '[ITEM] Item Active',
     itemCleanerActive: '[ITEM] Item Cleaner active',
     itemToCart: '[ITEM] Add To Cart',
     updateItemInCart: '[ITEM] Update In Cart',
-    removeItemCart: '[ITEM] Remove Item from Cart',
+    removeItemCart: '[ITEM] Remove Item From Cart',
     sortItems: '[ITEM] Sort Items By',
+    saveOriginalItems: '[ITEM] Array Original',
 
     uiStartLoading: '[UI] Start loading',
     uiFinishLoading: '[UI] Finish loading',

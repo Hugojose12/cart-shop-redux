@@ -2,7 +2,8 @@ import { types } from '../types/types';
 
 const initialState = {
     items: [],
-    active: null
+    active: null,
+    filter: []
 };
 
 export const itemsReducer = ( state = initialState, action ) => {
@@ -24,6 +25,11 @@ export const itemsReducer = ( state = initialState, action ) => {
                 ...state,
                 active: null
             }
+        case types.saveOriginalItems:
+            return {
+                ...state,
+                filter: [ ...action.payload ]
+            }   
         default:
             return state
     }

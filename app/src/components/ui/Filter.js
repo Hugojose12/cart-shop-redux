@@ -9,24 +9,39 @@ export const Filter = () => {
 
     const dispatch = useDispatch();
 
-    const [ formValues, handleInputChange ] = useForm( {
-        min: '',
-        max: ''
+    const [ formValues, setValues ] = useForm( {
+        min: "",
+        max: ""
     });
 
     const {min, max} = formValues
 
-    const handleFilteringPrices = (min, max) => {
-        dispatch( filterByPrices(min, max) )
-    }
+    const onNumberChange = ({target}) => {
 
+        console.log(target)
+
+        const newNumber = parseInt(target.value || 0, 10);
+
+        if (Number.isNaN(newNumber)) {
+            return;
+        }
+
+        setValues({
+            ...formValues,
+            [ target.name ]: newNumber
+        });
+        
+    }
 
     const checkPrice = (rule, value) => {
         if (value > 0) {
-          return Promise.resolve();
+          return Promise.resolve();   
         }
-    
         return Promise.reject('Price must be greater than zero!');
+    }
+
+    const onFinish = () => {
+        dispatch( filterByPrices(min, max))
     }
 
     const priceRange = [
@@ -43,16 +58,16 @@ export const Filter = () => {
         </p>
     );
 
-    const onFinish = () => {
-        console.log(min, max)
-        dispatch( filterByPrices(min, max))
+    const handleFilteringPrices = (min, max) => {
+        dispatch( filterByPrices(min, max) )
     }
 
     return(
         <Row>
             <Col span={24} className="filter_prices_links">
                 <p><strong>Prices</strong></p>
-                {priceRange.map(({min, max}) => <Comp min = {min} max={max} />)}
+                {priceRange.map(({min, max}) => <Comp key={`${min}`} min = {min} max={max} />)}
+                
                 <Form
                     name="filter_prices_form_controls"
                     onFinish={onFinish}
@@ -60,26 +75,33 @@ export const Filter = () => {
                     <Row>
                         <Col span={8}>
                             <Form.Item
-                                rules={[{validator: checkPrice,},]}
+                                rules={[
+                                    {
+                                      validator: checkPrice,
+                                    },
+                                ]}
                             >
                                 <Input 
-                                    name="min"
-                                    type="number" 
+                                    name="min" 
                                     placeholder="$min"
-                                    onChange={handleInputChange}
+                                    onChange={onNumberChange}
                                     value={min} 
                                 />
                             </Form.Item>
                         </Col>
                         <Col span={8}>
                             <Form.Item
-                                rules={[{validator: checkPrice,},]}
+                                
+                                rules={[
+                                    {
+                                      validator: checkPrice,
+                                    },
+                                ]}
                             >
-                                <Input 
+                                <Input
                                     name="max"
-                                    type="number" 
                                     placeholder="$max"
-                                    onChange={handleInputChange}
+                                    onChange={onNumberChange}
                                     value={max} 
                                 />
                             </Form.Item>

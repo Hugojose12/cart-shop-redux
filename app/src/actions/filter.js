@@ -4,20 +4,22 @@ import { types } from '../types/types';
 export const filterByPrices = (min = 0, max) => {
     return async(dispatch, getState) => {
 
-        const { filter, items } = getState().items;
+        const { copyItems, items } = getState().items;
 
-        if (filter === 0) dispatch( copyArrOriginalItems(items) )
+        let arrFilter = [];
 
-        const arrFilter = ArrOriginal.filter(({ price }) => price >= min && price <= max )
+        if (copyItems.length === 0) {
+            arrFilter = items.filter(({ price }) => price >= min && price <= max )
+            dispatch( copyArrOriginalItems(items) )
+        } else {
+            arrFilter = copyItems.filter(({ price }) => price >= min && price <= max )
+        }
 
-        dispatch( copyArrOriginalItems() )
         dispatch( itemsLoaded(arrFilter))
-
-        console.log("array original final", ArrOriginal)
     }
 }
 
 const copyArrOriginalItems = (items) => ({
     type: types.saveOriginalItems,
-    payload: itemss
+    payload: items
 })

@@ -7,7 +7,7 @@ export const types = {
     updateItemInCart: '[ITEM] Update In Cart',
     removeItemCart: '[ITEM] Remove Item From Cart',
     sortItems: '[ITEM] Sort Items By',
-    saveOriginalItems: '[ITEM] Array Original',
+    saveOriginalItems: '[ITEM] Copy Original Array of Articles',
 
     uiStartLoading: '[UI] Start loading',
     uiFinishLoading: '[UI] Finish loading',

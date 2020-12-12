@@ -6,14 +6,14 @@ import {
   Redirect
 } from "react-router-dom";
 import { Navbar } from '../components/ui/Navbar';
-import { ShopScreen } from '../components/shop/ShopScreen';
+import { ShopScreen } from '../pages/ShopScreen';
 import { Layout } from 'antd';
 import { useSelector } from 'react-redux';
 
 import 'antd/dist/antd.css';
 import '../styles/styles.css'
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 export const AppRouter = () => {
 
@@ -34,6 +34,7 @@ export const AppRouter = () => {
               <Redirect to="/" />
             </Switch>
           </Content>
+          <Footer style={{ textAlign: 'center' }}>Hugo Rivero 2020</Footer>
         </Router>
       </div>  
     </>

@@ -416,23 +416,38 @@
     padding-top: 5px;
 }
 
-.filter_prices_links strong{
-    font-size: 16px;
+.list-prices {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 5px;
 }
 
-.filter_prices_links p{
-    margin-bottom: 3px;
+#filter_prices_form_controls input{
+    width: 95%;
+}
+
+.list-prices li {
     cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
 }
 
-.filter_prices_links p:hover{
+.list-prices li:hover {
     text-decoration: underline;
 }
 
-.filter_prices_links form{
-    margin-top: 5px;
+.list-categories {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 5px;
 }
 
-#filter_prices_form_controls input{ 
-    width: 95%;
+.list-categories li {
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.list-categories li:hover {
+    text-decoration: underline;
 }

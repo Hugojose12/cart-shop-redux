@@ -1,11 +1,11 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
-import { filterByPrices } from '../../actions/filter';
-import { useForm } from '../../hooks/useForm';
+import { filterByPrices } from '../../../actions/filter';
+import { useForm } from '../../../hooks/useForm';
 
 
-export const Filter = () => {
+export const PriceFilter = () => {
 
     const dispatch = useDispatch();
 
@@ -17,8 +17,6 @@ export const Filter = () => {
     const {min, max} = formValues
 
     const onNumberChange = ({target}) => {
-
-        console.log(target)
 
         const newNumber = parseInt(target.value || 0, 10);
 
@@ -45,6 +43,7 @@ export const Filter = () => {
     }
 
     const priceRange = [
+        { min: -1, max: -1 },
         { min: 0, max: 25 },
         { min: 25, max: 50 },
         { min: 50, max: 100 },
@@ -53,12 +52,13 @@ export const Filter = () => {
     ];
 
     const Comp = ({ min, max }) => (
-        <p onClick={() => handleFilteringPrices(min, max)}>
-          {min >= 0 ? `$${min} to` : ""} {max > 200 ? `Above` : `$${max}`}
-        </p>
+        <li onClick={() => handleFilteringPrices(min, max)}>
+          { min < max ? `$${min} to ${max <= 200 ? `$${max}` : 'Above'}` : 'Any price'}
+        </li>
     );
 
     const handleFilteringPrices = (min, max) => {
+        //agregar validacion que el max no puede ser 0
         dispatch( filterByPrices(min, max) )
     }
 
@@ -66,8 +66,9 @@ export const Filter = () => {
         <Row>
             <Col span={24} className="filter_prices_links">
                 <p><strong>Prices</strong></p>
-                {priceRange.map(({min, max}) => <Comp key={`${min}`} min = {min} max={max} />)}
-                
+                <ul className="list-prices">
+                    {priceRange.map(({min, max}) => <Comp key={`${min}`} min={min} max={max} />)}
+                </ul>
                 <Form
                     name="filter_prices_form_controls"
                     onFinish={onFinish}

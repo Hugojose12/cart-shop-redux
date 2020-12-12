@@ -29,7 +29,13 @@ export const ModalItem = () => {
         dispatch ( startAddItemToCart(quantity, item) );
     }
 
-    //console.log(item)
+    const listOptions = [];
+    for (let i = 1; i <= 20; i++) {
+        listOptions.push(<Option key={i.toString(36) + i} value={i}>{i}</Option>);
+    }
+
+
+    console.log(listOptions)
     return (
         <Modal
             title={item.title}
@@ -61,13 +67,8 @@ export const ModalItem = () => {
                         defaultValue={1} 
                         style={{ width: 100 }}
                         onChange={handleQuantityItem}
-                    >
-                        <Option value="1">1</Option>
-                        <Option value="2">2</Option>
-                        <Option value="3">3</Option>
-                        <Option value="4">4</Option>
-                        <Option value="5">5</Option>
-                        
+                    > 
+                       {listOptions }
                     </Select>
                     <Button 
                         className="btn-modal-cart" 

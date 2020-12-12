@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { itemsStartLoading } from '../../actions/items';
-import { startLoading } from '../../actions/ui';
+import { itemsStartLoading } from '../actions/items';
+import { startLoading } from '../actions/ui';
 import { Row, Col } from 'antd';
 
-import { CarouselScreen } from './CarouselScreen';
-import { CardItem } from './CardItem';
-import { ModalItem } from './ModalItem';
-import { Cart } from './Cart';
-import { Sort } from '../ui/Sort';
-import { SkeletonUi } from '../ui/SkeletonUi';
-import { Filter } from '../ui/Filter';
+import { Banners } from '../components/shop/Banners';
+import { CardItem } from '../components/shop/CardItem';
+import { ModalItem } from '../components/shop/ModalItem';
+import { Cart } from '../components/shop/Cart';
+import { Sort } from '../components/ui/Sort';
+import { SkeletonUi } from '../components/ui/SkeletonUi';
+import { AllFilters } from '../components/ui/filters/AllFilters';
 
 
 export const ShopScreen = () => {
@@ -28,7 +28,7 @@ export const ShopScreen = () => {
 
     return (
         <>
-			<CarouselScreen />
+			<Banners />
 
 			{ loading ?
 
@@ -36,7 +36,7 @@ export const ShopScreen = () => {
 				
 			: 	<Row>
 					<Col span={4} offset={2}>
-						<Filter />
+						<AllFilters />
 					</Col>
 					<Col span={16} offset={0}>
 						<Row>

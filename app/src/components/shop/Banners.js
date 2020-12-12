@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Carousel, Button } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
-export const CarouselScreen = () => {
+export const Banners = () => {
     return (
         <Carousel autoplay autoplaySpeed={5000} dotPosition={"right"}>
             <Row >

@@ -8,12 +8,10 @@ export const filterByPrices = (min, max) => {
 
         let arrFilter = [];
 
-        if(min, max === -1) {
+        if( min=== -1 && max === -1 ) {
             min = 0
             max = 99999
         }
-
-        console.log(min, max)
 
         if (copyItems.length === 0) {
             arrFilter = items.filter(({ price }) => price >= min && price <= max )

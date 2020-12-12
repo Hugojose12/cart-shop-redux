@@ -20,6 +20,8 @@ export const Navbar = () => {
         if(inCart.length > 0) {
             const QuantityItems = inCart.map(current => current.quantity).reduce((acc, cur) => acc += cur)
             setitemsInCart(QuantityItems)
+        } else {
+            setitemsInCart(0)
         }
         
     }, [inCart])

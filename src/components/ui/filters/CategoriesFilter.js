@@ -1,5 +1,4 @@
 import React from 'react'
-import { Form, Input, Button, Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
 import { filterByCategories } from '../../../actions/filter';
 

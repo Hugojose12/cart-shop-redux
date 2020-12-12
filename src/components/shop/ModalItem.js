@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Modal, Button, Row, Col, Image, Select, Divider} from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { CloseModal, startLoadingModal } from '../../actions/ui';
-import { itemCleanerActive, startAddItemToCart, startCartUpdate } from '../../actions/items';
+import { itemCleanerActive, startAddItemToCart } from '../../actions/items';
 import { TagOutlined, HeartFilled, SwapOutlined, FacebookOutlined, TwitterOutlined, InstagramOutlined, GooglePlusOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -33,9 +33,7 @@ export const ModalItem = () => {
     for (let i = 1; i <= 20; i++) {
         listOptions.push(<Option key={i.toString(36) + i} value={i}>{i}</Option>);
     }
-
-
-    console.log(listOptions)
+    
     return (
         <Modal
             title={item.title}

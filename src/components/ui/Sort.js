@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Select } from 'antd';
+import { Col, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLoading } from '../../actions/ui';
 import { sortItemsBy } from '../../actions/sort';
@@ -24,7 +24,6 @@ export const Sort = () => {
             </Col>
             <Col span={12} className="select_sort_items">
                 <Select 
-                    defaultValue="0" 
                     style={{ width: 150 }} 
                     onChange={e => handleChangeSelect(e)}
                     defaultValue="Featured"

@@ -22,7 +22,7 @@ export const AppRouter = () => {
   return (
     <>
       <div>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Header className={`${cartOpen && 'navbar-open-cart'}`}>
             <Navbar/>
           </Header>

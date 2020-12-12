@@ -28,7 +28,7 @@ export const AppRouter = () => {
           </Header>
           <Content>
             <Switch>
-              <Route exact path="/cart" component="" />
+              <Route exact path="/cart" component={ShopScreen} />
               <Route exact path="/" component={ ShopScreen } />
                   
               <Redirect to="/" />

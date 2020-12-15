@@ -16,7 +16,7 @@ export const CardItem = (item) => {
 
     return (
         <>
-            <Col className="card_item" span={6} style={{padding: "0 15px"}}>
+            <Col className="card_item" span={6} xs={12} lg={6} style={{padding: "0 15px"}}>
                 <Card className="product-card" key={item.id}
                     hoverable
                     style={{ margin: "0" }}

@@ -35,10 +35,10 @@ export const ShopScreen = () => {
 				<SkeletonUi />
 				
 			: 	<Row>
-					<Col span={4} offset={2}>
+					<Col span={4} offset={2} xs={2} lg={4}>
 						<AllFilters />
 					</Col>
-					<Col span={16} offset={0}>
+					<Col span={16} offset={0} xs={18} lg={16}>
 						<Row>
 							<Sort />
 							{ items.map( item => (	
